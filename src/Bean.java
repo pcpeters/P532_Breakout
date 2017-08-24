@@ -1,80 +1,58 @@
-import java.awt.Image;
-import java.io.Serializable;
+import java.awt.Color;
 
-public class Bean implements Serializable {
+public abstract class Bean implements Constants  {
 	
-	private int bx;	//coordinates of ball (x, y)
-	private int by;
-	private int px;	//coordinates of paddle (x,y)
-	private int py;
-	private Image ball;
-	private Image paddle;
+	protected int x, y, width, height;
+	protected Color color;
 	
-	public Bean()
-	{
-		bx = 0;
-		by = 0;
-		px = 0;
-		py = 0;
+	public Bean(int x, int y, int width, int height) {
+		setX(x);
+		setY(y);
+		setWidth(width);
+		setHeight(height);
+		setColor(color);
 	}
 	
-	int getBx()
-	{
-		return bx;
+	public int getX() {
+		return x;
+	}
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public void setY(int y) {
+		this.y = y;
+	}
+
+	public int getWidth() {
+		return width;
+	}
+
+	public void setWidth(int width) {
+		this.width = width;
+	}
+
+	public int getHeight() {
+		return height;
+	}
+
+	public void setHeight(int height) {
+		this.height = height;
+	}
+
+	public Color getColor() {
+		return color;
+	}
+
+	public void setColor(Color color) {
+		this.color = color;
 	}
 	
-	int getBy()
-	{
-		return by;
-	}
 	
-	int getPx()
-	{
-		return px;
-	}
-	
-	int getPy()
-	{
-		return py;
-	}
-	
-	Image getBall()
-	{
-		return ball;
-	}
-	
-	Image getPaddle()
-	{
-		return paddle;
-	}
-	
-	void setBx(int x)
-	{
-		bx = x;
-	}
-	
-	void setBy(int y)
-	{
-		by = y;
-	}
-	
-	void setPx(int x)
-	{
-		px = x;
-	}
-	
-	void setPy(int y)
-	{
-		py = y;
-	}
-	
-	void setBall(Image b)
-	{
-		ball = b;
-	}
-	
-	void setPaddle(Image p)
-	{
-		paddle = p;
-	}
+
 }

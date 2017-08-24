@@ -1,8 +1,10 @@
 import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.Image;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class Breakout  
@@ -15,7 +17,7 @@ public class Breakout
 		bean.setPx(900);
 		bean.setPy(930);
 		Image ball = new ImageIcon("C:\\Users\\kshitij\\Desktop\\soccerball.png").getImage();
-		Image paddle = new ImageIcon("C:\\Users\\kshitij\\Desktop\\paddle.jpg").getImage();
+		Image paddle = new ImageIcon("C:\\Users\\Connor\\Desktop\\paddle.jpg").getImage();
 		bean.setPaddle(paddle);
 		bean.setBall(ball);
 		
@@ -29,6 +31,7 @@ public class Breakout
 		panel.setBackground(Color.magenta);
 		frame.add(panel);
 		frame.setVisible(true);
+		
 		
 		
 	}
