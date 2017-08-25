@@ -40,6 +40,7 @@ public class Breakout implements Constants
 		frame.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
 		ui = new BreakoutUI(WINDOW_WIDTH, WINDOW_HEIGHT);
 		frame.getContentPane().add(ui);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		frame.setVisible(true);
 		

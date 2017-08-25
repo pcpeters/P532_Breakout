@@ -31,6 +31,7 @@ public class BreakoutUI extends JPanel implements Constants, Subject, Runnable {
         register(ball);
         game = new Thread(this);
         game.start();
+        System.out.println(observers.size());
 	}
 	
 	BreakoutUI(Bean b)
@@ -50,8 +51,17 @@ public class BreakoutUI extends JPanel implements Constants, Subject, Runnable {
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		repaint();
-		notifyObservers();
+		while (true) {
+			repaint();
+			notifyObservers();
+			
+			try {
+				Thread.sleep(5);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 
 	@Override

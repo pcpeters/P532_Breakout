@@ -3,8 +3,8 @@ import java.awt.Graphics;
 
 public class Ball extends Bean implements Observer{
 
-	private int xDir;
-	private int yDir;
+	private int xDir = 1;
+	private int yDir = -1;
 	
 	public Ball(int x, int y, int width, int height, Color color) {
 		super(x, y, width, height, color);
@@ -38,6 +38,7 @@ public class Ball extends Bean implements Observer{
 	public void update(int signal){
 		x += xDir;
 		y += yDir;
+		//System.out.println("x:" + x + "y:" + y);
 	}
 	
 
