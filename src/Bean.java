@@ -5,7 +5,7 @@ public abstract class Bean implements Constants  {
 	protected int x, y, width, height;
 	protected Color color;
 	
-	public Bean(int x, int y, int width, int height) {
+	public Bean(int x, int y, int width, int height, Color color) {
 		setX(x);
 		setY(y);
 		setWidth(width);
