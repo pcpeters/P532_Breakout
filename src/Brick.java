@@ -21,7 +21,46 @@ public class Brick extends Bean{
 		setDestroyed(true);
 	}
 	
-
+	public boolean bottomCollision(int xBall, int yBall) {
+		if ((xBall >= x) && (xBall <= x + width + 1) && (yBall == y + height) && (destroyed == false)) {
+			brickCollision();
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	public boolean topCollision(int xBall, int yBall) {
+		if ((xBall >= x) && (xBall <= x + width + 1) && (yBall == y) && (destroyed == false)) {
+			brickCollision();
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	public boolean leftCollision(int xBall, int yBall) {
+		if ((yBall >= y) && (yBall <= y + height) && (xBall == x) && (destroyed == false)) {
+				brickCollision();
+				return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	public boolean rightCollision(int xBall, int yBall) {
+		if ((yBall >= y) && (yBall <= y + height) && (xBall == x + width) && (destroyed == false)) {
+				brickCollision();
+				return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
 	public boolean isDestroyed() {
 		return destroyed;
 	}
@@ -29,5 +68,4 @@ public class Brick extends Bean{
 	public void setDestroyed(boolean destroyed) {
 		this.destroyed = destroyed;
 	}
-	
 }
