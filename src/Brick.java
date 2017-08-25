@@ -1,11 +1,12 @@
+import java.awt.Color;
 import java.awt.Graphics;
 
 public class Brick extends Bean{
 
 	private boolean destroyed;
 	
-	public Brick(int x, int y, int width, int height) {
-		super(x, y, width, height);
+	public Brick(int x, int y, int width, int height, Color color) {
+		super(x, y, width, height, color);
 		setDestroyed(false);
 	}
 	
@@ -16,7 +17,7 @@ public class Brick extends Bean{
 		}
 	}
 	
-	public void addHit() {
+	public void brickCollision() {
 		setDestroyed(true);
 	}
 	
