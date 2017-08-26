@@ -85,7 +85,7 @@ public class BreakoutUI extends JPanel implements Constants, Subject, Runnable {
             //System.out.println("xdir = "+ball.getxDir());
             checkWall(x, y);
             checkPaddle(x, y);
-            
+            brickCollisionCheck(x, y);
 			repaint();
 			notifyObservers();
 			
@@ -139,6 +139,25 @@ public class BreakoutUI extends JPanel implements Constants, Subject, Runnable {
 		 if (paddle.getX() + paddle.getWidth() >= getWidth()) {
 	         paddle.setX(getWidth() - paddle.getWidth());
 	     }
+	 }
+	 
+	 private void brickCollisionCheck(int x, int y) {
+		 for (int i=0; i<BRICK_COLUMNS;i++) {
+			 for (int j=0; j<BRICK_ROWS; j++) {
+				 if (brick[i][j].bottomCollision(x, y)) {
+					 ball.setyDir(1);
+				 }
+				 if (brick[i][j].leftCollision(x, y)) {
+					 ball.setxDir(-1);
+				 }
+				 if (brick[i][j].rightCollision(x, y)) {
+					 ball.setxDir(1);
+				 }
+				 if (brick[i][j].topCollision(x, y)) {
+					 ball.setyDir(-1);
+				 }
+			 }
+		 }
 	 }
 
 	@Override
