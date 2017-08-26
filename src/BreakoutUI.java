@@ -2,7 +2,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class BreakoutUI extends JPanel implements Constants, Subject, Runnable {
@@ -32,6 +31,8 @@ public class BreakoutUI extends JPanel implements Constants, Subject, Runnable {
                 Color.BLACK);
         
         makeBricks();        
+        
+        addKeyListener(null);
         
         observers = new ArrayList<Observer>();
         register(ball);
@@ -125,6 +126,7 @@ public class BreakoutUI extends JPanel implements Constants, Subject, Runnable {
 	 
 	 public void checkPaddle(int x, int y){		
 		 
+		 //Checking paddle collision
 		 if((x >= paddle.getX()) && (x <= (paddle.getX() + paddle.getWidth()))
 				 && ((y >= paddle.getY())) && (y <= (paddle.getY() + paddle.getHeight()))){
 			 
