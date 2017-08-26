@@ -11,10 +11,10 @@ public class Brick extends Bean{
 	}
 	
 	public void draw(Graphics g) {
-		if (!destroyed) {
+		//if (!destroyed) {
 			g.setColor(color);
 			g.fillRect(x, y, width, height);
-		}
+		//}
 	}
 	
 	public void brickCollision() {

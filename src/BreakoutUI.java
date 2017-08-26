@@ -2,37 +2,54 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class BreakoutUI extends JPanel implements Constants, Subject, Runnable {
 	
 	private List<Observer> observers;
-	//private Bean bean = new Bean();
+
 	public void notifyObservers() {
 		for (Observer observer: observers) {
 			observer.update(5);
 		}
 	}
-	//private static int ballX = 0, ballY = 0, key = 0;
 	
 	private Ball ball;
 	private Paddle paddle;
+	private Brick[][] brick = new Brick[BRICK_COLUMNS][BRICK_ROWS];
+	
 	private Thread game;
 	
 	public BreakoutUI(int width, int height ){
+		
 		setBackground(Color.GREEN);
+		
 		paddle = new Paddle(PADDLE_X_START, PADDLE_Y_START, PADDLE_WIDTH,
                 PADDLE_HEIGHT, Color.BLACK);
+		
         ball = new Ball(BALL_X_START, BALL_Y_START, BALL_WIDTH, BALL_HEIGHT,
                 Color.BLACK);
+        
+        makeBricks();        
+        
         observers = new ArrayList<Observer>();
         register(ball);
         game = new Thread(this);
         game.start();
         //System.out.println(observers.size());
 	}
+	
+	// Fills the array of bricks
+    private void makeBricks() {
+        for (int i = 0; i < BRICK_COLUMNS; i++) {
+            for (int j = 0; j < BRICK_ROWS; j++) {
+                brick[i][j] = new Brick((i * BRICK_WIDTH),
+                        ((j * BRICK_HEIGHT) + (BRICK_HEIGHT / 2)),
+                        BRICK_WIDTH - 5, BRICK_HEIGHT - 5, Color.gray);
+            }
+        }
+    }
 	
 	BreakoutUI(Bean b)
 	{
@@ -46,6 +63,11 @@ public class BreakoutUI extends JPanel implements Constants, Subject, Runnable {
 		paddle.draw(g);
 		ball.draw(g);
 		
+		for (int i = 0; i < BRICK_COLUMNS; i++) {
+            for (int j = 0; j < BRICK_ROWS; j++) {
+                brick[i][j].draw(g);
+            }
+        }		
 	}
 
 	@Override

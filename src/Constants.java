@@ -21,7 +21,7 @@ public interface Constants {
 	public static final int BRICK_HEIGHT = 25;
     public static final int MAX_BRICKS = 50;
     public static final int NO_BRICKS = 0;
-    public static final int BRICK_ROWS = 5;
+    public static final int BRICK_ROWS = 3;
     public static final int BRICK_COLUMNS = 10;
 	
 	
