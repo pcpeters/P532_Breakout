@@ -11,10 +11,10 @@ public class Brick extends Bean{
 	}
 	
 	public void draw(Graphics g) {
-		//if (!destroyed) {
+		if (!destroyed) {
 			g.setColor(color);
 			g.fillRect(x, y, width, height);
-		//}
+		}
 	}
 	
 	public void brickCollision() {
@@ -22,7 +22,7 @@ public class Brick extends Bean{
 	}
 	
 	public boolean bottomCollision(int xBall, int yBall) {
-		if ((xBall >= x) && (xBall <= x + width + 1) && (yBall == y + height) && (destroyed == false)) {
+		if ((xBall >= x) && (xBall <= x + width) && (yBall == y + height) && (destroyed == false)) {
 			brickCollision();
 			return true;
 		}
@@ -32,7 +32,7 @@ public class Brick extends Bean{
 	}
 	
 	public boolean topCollision(int xBall, int yBall) {
-		if ((xBall >= x) && (xBall <= x + width + 1) && (yBall == y) && (destroyed == false)) {
+		if ((xBall >= x) && (xBall <= x + width) && (yBall == y) && (destroyed == false)) {
 			brickCollision();
 			return true;
 		}
