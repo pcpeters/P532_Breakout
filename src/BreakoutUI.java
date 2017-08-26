@@ -139,7 +139,7 @@ public class BreakoutUI extends JPanel implements Constants, Subject, Runnable {
 		 
 		 //To ensure paddle is bound by the frame
 		 if(paddle.getX() <=0) {
-			 paddle.setX(x);
+			 paddle.setX(0);
 		 }
 		 
 		 if (paddle.getX() + paddle.getWidth() >= getWidth()) {
