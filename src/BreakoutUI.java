@@ -1,5 +1,7 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JPanel;
@@ -21,6 +23,10 @@ public class BreakoutUI extends JPanel implements Constants, Subject, Runnable {
 	private Thread game;
 	
 	public BreakoutUI(int width, int height ){
+		super.setSize(width, height);
+		
+		addKeyListener(new BreakoutUIListener());
+		setFocusable(true);
 		
 		setBackground(Color.GREEN);
 		
@@ -135,7 +141,7 @@ public class BreakoutUI extends JPanel implements Constants, Subject, Runnable {
 		 
 		 //To ensure paddle is bound by the frame
 		 if(paddle.getX() <=0) {
-			 paddle.setX(x);
+			 paddle.setX(0);
 		 }
 		 
 		 if (paddle.getX() + paddle.getWidth() >= getWidth()) {
@@ -161,6 +167,7 @@ public class BreakoutUI extends JPanel implements Constants, Subject, Runnable {
 			 }
 		 }
 	 }
+	 
 
 	@Override
 	public void register(Observer o) {
@@ -180,4 +187,21 @@ public class BreakoutUI extends JPanel implements Constants, Subject, Runnable {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	private class BreakoutUIListener extends KeyAdapter {
+		
+		@Override
+		public void keyPressed(KeyEvent ke) {
+			int key = ke.getKeyCode();
+			System.out.print(key);
+			if (key == 37) {
+				paddle.setX(paddle.getX() - 50);
+			}
+			
+			if (key == 39) {
+				paddle.setX(paddle.getX() + 50);
+			}
+		}
+	}
+	
 }
