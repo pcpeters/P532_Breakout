@@ -15,7 +15,7 @@ public class BreakoutUI extends JPanel implements Constants, Subject, Runnable {
 			observer.update(5);
 		}
 	}
-	private static int ballX = 0, ballY = 0, key = 0;
+	//private static int ballX = 0, ballY = 0, key = 0;
 	
 	private Ball ball;
 	private Paddle paddle;
@@ -31,7 +31,7 @@ public class BreakoutUI extends JPanel implements Constants, Subject, Runnable {
         register(ball);
         game = new Thread(this);
         game.start();
-        System.out.println(observers.size());
+        //System.out.println(observers.size());
 	}
 	
 	BreakoutUI(Bean b)
@@ -52,6 +52,18 @@ public class BreakoutUI extends JPanel implements Constants, Subject, Runnable {
 	public void run() {
 		// TODO Auto-generated method stub
 		while (true) {
+			
+			int x = ball.getX();
+            int y = ball.getY();
+            
+            int w = getWidth();
+            int bw = ball.getWidth();
+            
+            //System.out.print("Component width - "+w+" ball width - "+bw);
+            //System.out.println("xdir = "+ball.getxDir());
+            checkWall(x, y);
+            checkPaddle(x, y);
+            
 			repaint();
 			notifyObservers();
 			
@@ -63,6 +75,49 @@ public class BreakoutUI extends JPanel implements Constants, Subject, Runnable {
 			}
 		}
 	}
+
+	 private void checkWall(int x, int y) {
+		 
+		 if(getWidth() > 0){
+			//Right wall		 
+			 if (x >= getWidth() - ball.getWidth()) {	
+		         ball.setxDir(-1);
+			 }
+			 
+			 //Left wall
+			 if (x <= 0) {
+		         ball.setxDir(1);
+		     }
+			 
+			 //Top
+		     if (y <= 0) {
+		    	 ball.setyDir(1);
+		     }
+		         
+		     //Bottom
+		     if (y >= getHeight()) {
+		    	 ball.setyDir(-1);
+		     }			 
+		 }		 
+	 }
+	 
+	 public void checkPaddle(int x, int y){		
+		 
+		 if((x >= paddle.getX()) && (x <= (paddle.getX() + paddle.getWidth()))
+				 && ((y >= paddle.getY())) && (y <= (paddle.getY() + paddle.getHeight()))){
+			 
+			 ball.setyDir(-1);
+		 }
+		 
+		 //To ensure paddle is bound by the frame
+		 if(paddle.getX() <=0) {
+			 paddle.setX(x);
+		 }
+		 
+		 if (paddle.getX() + paddle.getWidth() >= getWidth()) {
+	         paddle.setX(getWidth() - paddle.getWidth());
+	     }
+	 }
 
 	@Override
 	public void register(Observer o) {
