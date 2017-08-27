@@ -25,7 +25,7 @@ public class BreakoutUI extends JPanel implements Constants, Subject, Runnable {
 	public BreakoutUI(int width, int height ){
 		super.setSize(width, height);
 		
-		addKeyListener(new BreakoutUIListener());
+		addKeyListener(new MovePaddle());
 		setFocusable(true);
 		
 		setBackground(Color.GREEN);
@@ -152,17 +152,22 @@ public class BreakoutUI extends JPanel implements Constants, Subject, Runnable {
 	 private void brickCollisionCheck(int x, int y) {
 		 for (int i=0; i<BRICK_COLUMNS;i++) {
 			 for (int j=0; j<BRICK_ROWS; j++) {
+				 
 				 if (brick[i][j].bottomCollision(x, y)) {
-					 ball.setyDir(1);
+					 //ball.setyDir(1);
+					 ball.setyDir(-ball.getyDir());
 				 }
 				 if (brick[i][j].leftCollision(x, y)) {
-					 ball.setxDir(-1);
+					 //ball.setxDir(-1);
+					 ball.setxDir(-ball.getxDir());
 				 }
 				 if (brick[i][j].rightCollision(x, y)) {
-					 ball.setxDir(1);
+					 //ball.setxDir(1);
+					 ball.setxDir(-ball.getxDir());
 				 }
 				 if (brick[i][j].topCollision(x, y)) {
-					 ball.setyDir(-1);
+					 //ball.setyDir(-1);
+					 ball.setyDir(-ball.getyDir());
 				 }
 			 }
 		 }
@@ -188,17 +193,17 @@ public class BreakoutUI extends JPanel implements Constants, Subject, Runnable {
 		
 	}
 	
-	private class BreakoutUIListener extends KeyAdapter {
+	private class MovePaddle extends KeyAdapter {
 		
 		@Override
 		public void keyPressed(KeyEvent ke) {
 			int key = ke.getKeyCode();
-			System.out.print(key);
-			if (key == 37) {
+			//System.out.print(key);
+			if (key == KeyEvent.VK_LEFT) {
 				paddle.setX(paddle.getX() - 50);
 			}
 			
-			if (key == 39) {
+			if (key == KeyEvent.VK_RIGHT) {
 				paddle.setX(paddle.getX() + 50);
 			}
 		}
