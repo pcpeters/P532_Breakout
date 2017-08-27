@@ -10,12 +10,6 @@ public class BreakoutUI extends JPanel implements Constants, Subject, Runnable {
 	
 	private List<Observer> observers;
 
-	public void notifyObservers() {
-		for (Observer observer: observers) {
-			observer.update(5);
-		}
-	}
-	
 	private Ball ball;
 	private Paddle paddle;
 	private Brick[][] brick = new Brick[BRICK_COLUMNS][BRICK_ROWS];
@@ -30,11 +24,9 @@ public class BreakoutUI extends JPanel implements Constants, Subject, Runnable {
 		
 		setBackground(Color.GREEN);
 		
-		paddle = new Paddle(PADDLE_X_START, PADDLE_Y_START, PADDLE_WIDTH,
-                PADDLE_HEIGHT, Color.BLACK);
+		paddle = new Paddle(PADDLE_X_START, PADDLE_Y_START, PADDLE_WIDTH, PADDLE_HEIGHT, Color.BLACK);
 		
-        ball = new Ball(BALL_X_START, BALL_Y_START, BALL_WIDTH, BALL_HEIGHT,
-                Color.BLACK);
+        ball = new Ball(BALL_X_START, BALL_Y_START, BALL_WIDTH, BALL_HEIGHT, Color.BLACK);
         
         makeBricks();        
         
@@ -94,7 +86,7 @@ public class BreakoutUI extends JPanel implements Constants, Subject, Runnable {
             checkPaddle(x, y);
             brickCollisionCheck(x, y);
 			repaint();
-			notifyObservers();
+			notifyObserver();
 			
 			try {
 				Thread.sleep(5);
@@ -182,8 +174,10 @@ public class BreakoutUI extends JPanel implements Constants, Subject, Runnable {
 	
 
 	@Override
-	public void notifyObserver(Observer o) {
-		// TODO Auto-generated method stub
+	public void notifyObserver() {
+		for (Observer observer: observers) {
+			observer.update(5);
+		}
 		
 	}
 
