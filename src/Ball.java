@@ -39,8 +39,5 @@ public class Ball extends Bean implements Observer{
 		x += xDir;
 		y += yDir;
 		//System.out.println("x:" + x + "y:" + y);
-	}
-	
-
-	
+	}	
 }

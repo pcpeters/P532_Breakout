@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Graphics;
 
 public abstract class Bean implements Constants  {
 	
@@ -53,6 +54,7 @@ public abstract class Bean implements Constants  {
 		this.color = color;
 	}
 	
-	
-
+	public void draw(Graphics g){
+		
+	}
 }
