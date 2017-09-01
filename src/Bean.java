@@ -6,6 +6,7 @@ public abstract class Bean implements Constants  {
 	protected int x, y, width, height;
 	protected Color color;
 	
+	//Constructor
 	public Bean(int x, int y, int width, int height, Color color) {
 		setX(x);
 		setY(y);
@@ -14,6 +15,12 @@ public abstract class Bean implements Constants  {
 		setColor(color);
 	}
 	
+	//Function to draw 
+	public void draw(Graphics g){
+		
+	}
+	
+	//Getters and Setters
 	public int getX() {
 		return x;
 	}
@@ -54,7 +61,5 @@ public abstract class Bean implements Constants  {
 		this.color = color;
 	}
 	
-	public void draw(Graphics g){
-		
-	}
+	
 }

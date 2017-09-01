@@ -11,8 +11,6 @@ public class Clock extends Bean implements Observer {
 	public void update(int signal) {
 		// TODO Auto-generated method stub
 		
-	}
-	
-	
+	}	
 
 }

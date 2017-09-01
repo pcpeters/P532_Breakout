@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -16,16 +17,18 @@ public class BreakoutUI extends JPanel implements Constants, Subject, Runnable {
 	
 	private Thread game;
 	
+	private volatile boolean isPaused = true;
+	private boolean gameOver = false;
+	
+	//Constructor
 	public BreakoutUI(int width, int height ){
-		super.setSize(width, height);
 		
-		addKeyListener(new MovePaddle());
-		setFocusable(true);
-		
+		super.setSize(width, height);		
+		addKeyListener(new UIListener());
+		setFocusable(true);		
 		setBackground(Color.GREEN);
 		
-		paddle = new Paddle(PADDLE_X_START, PADDLE_Y_START, PADDLE_WIDTH, PADDLE_HEIGHT, Color.BLACK);
-		
+		paddle = new Paddle(PADDLE_X_START, PADDLE_Y_START, PADDLE_WIDTH, PADDLE_HEIGHT, Color.BLACK);		
         ball = new Ball(BALL_X_START, BALL_Y_START, BALL_WIDTH, BALL_HEIGHT, Color.BLACK);
         
         makeBricks();        
@@ -34,9 +37,9 @@ public class BreakoutUI extends JPanel implements Constants, Subject, Runnable {
         
         observers = new ArrayList<Observer>();
         register(ball);
+        
         game = new Thread(this);
         game.start();
-        //System.out.println(observers.size());
 	}
 	
 	// Fills the array of bricks
@@ -50,9 +53,41 @@ public class BreakoutUI extends JPanel implements Constants, Subject, Runnable {
         }
     }
 	
-	BreakoutUI(Bean b)
-	{
-		//bean = b;
+	//Start thread
+    private void start() {
+        isPaused = false;
+    }
+
+    //Stop thread
+    private void stop() {
+        isPaused = true;
+    }
+
+    
+	@Override
+	public void run() {
+		
+		while (true) {
+			
+			while(!isPaused){
+				
+				int x = ball.getX();
+	            int y = ball.getY();
+
+	            checkWall(x, y);
+	            //checkIfOut(y);
+	            checkPaddle(x, y);
+	            brickCollisionCheck(x, y);
+				notifyObserver();
+				repaint();
+				
+				try {
+					Thread.sleep(5);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}			
+			}			
+		}
 	}
 	
 	@Override
@@ -66,38 +101,16 @@ public class BreakoutUI extends JPanel implements Constants, Subject, Runnable {
             for (int j = 0; j < BRICK_ROWS; j++) {
                 brick[i][j].draw(g);
             }
-        }		
-	}
-
-	@Override
-	public void run() {
-		// TODO Auto-generated method stub
-		while (true) {
+        }
+		
+		if(gameOver){
+			g.setFont(new Font("TimesRoman", Font.PLAIN, 30)); 
+			g.drawString("Game Over!", getWidth() /3, getHeight()/2);
 			
-			int x = ball.getX();
-            int y = ball.getY();
-            
-            int w = getWidth();
-            int bw = ball.getWidth();
-            
-            //System.out.print("Component width - "+w+" ball width - "+bw);
-            //System.out.println("xdir = "+ball.getxDir());
-            checkWall(x, y);
-            checkPaddle(x, y);
-            brickCollisionCheck(x, y);
-			repaint();
-			notifyObserver();
-			
-			try {
-				Thread.sleep(5);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 		}
 	}
 
-	 private void checkWall(int x, int y) {
+	private void checkWall(int x, int y) {
 		 
 		 if(getWidth() > 0){
 			//Right wall		 
@@ -117,7 +130,9 @@ public class BreakoutUI extends JPanel implements Constants, Subject, Runnable {
 		         
 		     //Bottom
 		     if (y >= getHeight()) {
-		    	 ball.setyDir(-1);
+		    	 //ball.setyDir(-1);
+		    	 gameOver=true;
+		    	 stop();
 		     }			 
 		 }		 
 	 }
@@ -165,6 +180,8 @@ public class BreakoutUI extends JPanel implements Constants, Subject, Runnable {
 		 }
 	 }
 	 
+	
+	 
 
 	@Override
 	public void register(Observer o) {
@@ -187,12 +204,23 @@ public class BreakoutUI extends JPanel implements Constants, Subject, Runnable {
 		
 	}
 	
-	private class MovePaddle extends KeyAdapter {
+	private class UIListener extends KeyAdapter {
 		
 		@Override
 		public void keyPressed(KeyEvent ke) {
+			
 			int key = ke.getKeyCode();
-			//System.out.print(key);
+			
+			//To start or pause the game
+			if (key == KeyEvent.VK_SPACE) {
+				if(!isPaused){
+					stop();
+				}
+				else{
+					start();
+				}
+			}
+
 			if (key == KeyEvent.VK_LEFT) {
 				paddle.setX(paddle.getX() - 50);
 			}

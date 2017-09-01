@@ -5,7 +5,9 @@ public class Brick extends Bean{
 
 	private boolean destroyed;
 	
+	//Constructor
 	public Brick(int x, int y, int width, int height, Color color) {
+		
 		super(x, y, width, height, color);
 		setDestroyed(false);
 	}
