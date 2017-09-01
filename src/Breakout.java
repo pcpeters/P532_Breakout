@@ -15,7 +15,7 @@ public class Breakout implements Constants
 	public static void main(String[] ar)
 	{	
 
-		frame = new JFrame("Breakout 1.0");
+		frame = new JFrame("Breakout: The Beginnings");
 		frame.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
 		ui = new BreakoutUI(WINDOW_WIDTH, WINDOW_HEIGHT);
 		frame.getContentPane().add(ui);

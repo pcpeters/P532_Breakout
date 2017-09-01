@@ -3,7 +3,7 @@ public interface Constants {
 	
 	//Window Attributes
 	public static final int WINDOW_WIDTH= 500;
-	public static final int WINDOW_HEIGHT = 500;
+	public static final int WINDOW_HEIGHT = 520;
 	
 	//Ball attributes
 	public static final int BALL_WIDTH = 10;

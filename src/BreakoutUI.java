@@ -13,6 +13,7 @@ public class BreakoutUI extends JPanel implements Constants, Subject, Runnable {
 
 	private Ball ball;
 	private Paddle paddle;
+	private Clock clock;
 	private Brick[][] brick = new Brick[BRICK_COLUMNS][BRICK_ROWS];
 	
 	private Thread game;
@@ -26,17 +27,18 @@ public class BreakoutUI extends JPanel implements Constants, Subject, Runnable {
 		super.setSize(width, height);		
 		addKeyListener(new UIListener());
 		setFocusable(true);		
-		setBackground(Color.GREEN);
+		setBackground(Color.WHITE);
 		
 		paddle = new Paddle(PADDLE_X_START, PADDLE_Y_START, PADDLE_WIDTH, PADDLE_HEIGHT, Color.BLACK);		
         ball = new Ball(BALL_X_START, BALL_Y_START, BALL_WIDTH, BALL_HEIGHT, Color.BLACK);
-        
+        clock = new Clock(getWidth() - 100, getHeight() - 30, BALL_WIDTH, BALL_HEIGHT, Color.RED);
         makeBricks();        
         
         addKeyListener(null);
         
         observers = new ArrayList<Observer>();
         register(ball);
+        register(clock);
         
         game = new Thread(this);
         game.start();
@@ -48,7 +50,7 @@ public class BreakoutUI extends JPanel implements Constants, Subject, Runnable {
             for (int j = 0; j < BRICK_ROWS; j++) {
                 brick[i][j] = new Brick((i * BRICK_WIDTH),
                         ((j * BRICK_HEIGHT) + (BRICK_HEIGHT / 2)),
-                        BRICK_WIDTH - 5, BRICK_HEIGHT - 5, Color.gray);
+                        BRICK_WIDTH - 5, BRICK_HEIGHT - 5, Color.GRAY);
             }
         }
     }
@@ -96,6 +98,7 @@ public class BreakoutUI extends JPanel implements Constants, Subject, Runnable {
 		super.paintComponent(g);
 		paddle.draw(g);
 		ball.draw(g);
+		clock.draw(g);
 		
 		for (int i = 0; i < BRICK_COLUMNS; i++) {
             for (int j = 0; j < BRICK_ROWS; j++) {
@@ -104,6 +107,7 @@ public class BreakoutUI extends JPanel implements Constants, Subject, Runnable {
         }
 		
 		if(gameOver){
+			g.setColor(Color.RED);
 			g.setFont(new Font("TimesRoman", Font.PLAIN, 30)); 
 			g.drawString("Game Over!", getWidth() /3, getHeight()/2);
 			
