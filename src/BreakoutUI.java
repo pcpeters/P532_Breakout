@@ -29,7 +29,7 @@ public class BreakoutUI extends JPanel implements Subject, Runnable {
 		setFocusable(true);		
 		setBackground(Color.WHITE);
 		
-		paddle = new Paddle(Constants.PADDLE_X_START, Constants.PADDLE_Y_START, Constants.PADDLE_WIDTH, Constants.PADDLE_HEIGHT, Color.BLACK);		
+		paddle = new Paddle(Constants.PADDLE_X_START, Constants.PADDLE_Y_START, Constants.PADDLE_WIDTH, Constants.PADDLE_HEIGHT, Color.GRAY);		
         ball = new Ball(Constants.BALL_X_START, Constants.BALL_Y_START, Constants.BALL_WIDTH, Constants.BALL_HEIGHT, Color.BLACK);
         clock = new Clock(getWidth() - 100, getHeight() - 30, Constants.BALL_WIDTH, Constants.BALL_HEIGHT, Color.RED);
         makeBricks();        
@@ -146,7 +146,7 @@ public class BreakoutUI extends JPanel implements Subject, Runnable {
 		 
 		 //Checking paddle collision
 		 if((x >= paddle.getX()) && (x <= (paddle.getX() + paddle.getWidth()))
-				 && ((y >= paddle.getY())) && (y <= (paddle.getY() + paddle.getHeight()))){
+				 && ((y + ball.getHeight() >= paddle.getY())) && (y <= (paddle.getY() + paddle.getHeight()))){
 			 
 			 ball.setyDir(-1);
 		 }
