@@ -7,14 +7,14 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JPanel;
 
-public class BreakoutUI extends JPanel implements Constants, Subject, Runnable {
+public class BreakoutUI extends JPanel implements Subject, Runnable {
 	
 	private List<Observer> observers;
 
 	private Ball ball;
 	private Paddle paddle;
 	private Clock clock;
-	private Brick[][] brick = new Brick[BRICK_COLUMNS][BRICK_ROWS];
+	private Brick[][] brick = new Brick[Constants.BRICK_COLUMNS][Constants.BRICK_ROWS];
 	
 	private Thread game;
 	
@@ -29,9 +29,9 @@ public class BreakoutUI extends JPanel implements Constants, Subject, Runnable {
 		setFocusable(true);		
 		setBackground(Color.WHITE);
 		
-		paddle = new Paddle(PADDLE_X_START, PADDLE_Y_START, PADDLE_WIDTH, PADDLE_HEIGHT, Color.BLACK);		
-        ball = new Ball(BALL_X_START, BALL_Y_START, BALL_WIDTH, BALL_HEIGHT, Color.BLACK);
-        clock = new Clock(getWidth() - 100, getHeight() - 30, BALL_WIDTH, BALL_HEIGHT, Color.RED);
+		paddle = new Paddle(Constants.PADDLE_X_START, Constants.PADDLE_Y_START, Constants.PADDLE_WIDTH, Constants.PADDLE_HEIGHT, Color.BLACK);		
+        ball = new Ball(Constants.BALL_X_START, Constants.BALL_Y_START, Constants.BALL_WIDTH, Constants.BALL_HEIGHT, Color.BLACK);
+        clock = new Clock(getWidth() - 100, getHeight() - 30, Constants.BALL_WIDTH, Constants.BALL_HEIGHT, Color.RED);
         makeBricks();        
         
         addKeyListener(null);
@@ -43,14 +43,15 @@ public class BreakoutUI extends JPanel implements Constants, Subject, Runnable {
         game = new Thread(this);
         game.start();
 	}
-	
+
+
 	// Fills the array of bricks
     private void makeBricks() {
-        for (int i = 0; i < BRICK_COLUMNS; i++) {
-            for (int j = 0; j < BRICK_ROWS; j++) {
-                brick[i][j] = new Brick((i * BRICK_WIDTH),
-                        ((j * BRICK_HEIGHT) + (BRICK_HEIGHT / 2)),
-                        BRICK_WIDTH - 5, BRICK_HEIGHT - 5, Color.GRAY);
+        for (int i = 0; i < Constants.BRICK_COLUMNS; i++) {
+            for (int j = 0; j < Constants.BRICK_ROWS; j++) {
+                brick[i][j] = new Brick((i * Constants.BRICK_WIDTH),
+                        ((j * Constants.BRICK_HEIGHT) + (Constants.BRICK_HEIGHT / 2)),
+                        Constants.BRICK_WIDTH - 5, Constants.BRICK_HEIGHT - 5, Color.GRAY);
             }
         }
     }
@@ -100,8 +101,8 @@ public class BreakoutUI extends JPanel implements Constants, Subject, Runnable {
 		ball.draw(g);
 		clock.draw(g);
 		
-		for (int i = 0; i < BRICK_COLUMNS; i++) {
-            for (int j = 0; j < BRICK_ROWS; j++) {
+		for (int i = 0; i < Constants.BRICK_COLUMNS; i++) {
+            for (int j = 0; j < Constants.BRICK_ROWS; j++) {
                 brick[i][j].draw(g);
             }
         }
@@ -161,30 +162,24 @@ public class BreakoutUI extends JPanel implements Constants, Subject, Runnable {
 	 }
 	 
 	 private void brickCollisionCheck(int x, int y) {
-		 for (int i=0; i<BRICK_COLUMNS;i++) {
-			 for (int j=0; j<BRICK_ROWS; j++) {
+		 for (int i=0; i<Constants.BRICK_COLUMNS;i++) {
+			 for (int j=0; j<Constants.BRICK_ROWS; j++) {
 				 
 				 if (brick[i][j].bottomCollision(x, y)) {
-					 //ball.setyDir(1);
 					 ball.setyDir(-ball.getyDir());
 				 }
 				 if (brick[i][j].leftCollision(x, y)) {
-					 //ball.setxDir(-1);
 					 ball.setxDir(-ball.getxDir());
 				 }
 				 if (brick[i][j].rightCollision(x, y)) {
-					 //ball.setxDir(1);
 					 ball.setxDir(-ball.getxDir());
 				 }
 				 if (brick[i][j].topCollision(x, y)) {
-					 //ball.setyDir(-1);
 					 ball.setyDir(-ball.getyDir());
 				 }
 			 }
 		 }
 	 }
-	 
-	
 	 
 
 	@Override

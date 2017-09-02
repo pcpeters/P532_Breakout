@@ -13,8 +13,8 @@ public class Paddle extends Bean{
     }
 	
 	public void reset() {
-        x = PADDLE_X_START;
-        y = PADDLE_Y_START;
+        x = Constants.PADDLE_X_START;
+        y = Constants.PADDLE_Y_START;
     }
 	
 	public boolean hitPaddle(int ballX, int ballY) {

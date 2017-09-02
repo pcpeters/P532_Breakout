@@ -1,5 +1,5 @@
 
-public interface Constants {
+public class Constants {
 	
 	//Window Attributes
 	public static final int WINDOW_WIDTH= 500;

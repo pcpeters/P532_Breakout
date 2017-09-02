@@ -1,7 +1,7 @@
 import java.awt.Color;
 import java.awt.Graphics;
 
-public abstract class Bean implements Constants  {
+public abstract class Bean {
 	
 	protected int x, y, width, height;
 	protected Color color;

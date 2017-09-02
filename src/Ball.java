@@ -18,8 +18,8 @@ public class Ball extends Bean implements Observer{
 	
 	// Resets the ball to original position at center of screen
     public void reset() {
-        x = BALL_X_START;
-        y = BALL_Y_START;
+        x = Constants.BALL_X_START;
+        y = Constants.BALL_Y_START;
         xDir = 1;
         yDir = -1;
     }
