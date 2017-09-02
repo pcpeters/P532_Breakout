@@ -1,7 +1,7 @@
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class Clock extends Bean implements Observer {
+public class Clock extends GameObject implements Observer {
 
 	private int time;
 	

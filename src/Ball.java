@@ -1,7 +1,7 @@
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class Ball extends Bean implements Observer{
+public class Ball extends GameObject implements Observer{
 
 	private int xDir = 1;
 	private int yDir = -1;

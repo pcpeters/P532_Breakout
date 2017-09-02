@@ -1,7 +1,7 @@
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class Brick extends Bean{
+public class Brick extends GameObject{
 
 	private boolean destroyed;
 	

@@ -1,13 +1,13 @@
 import java.awt.Color;
 import java.awt.Graphics;
 
-public abstract class Bean {
+public abstract class GameObject {
 	
 	protected int x, y, width, height;
 	protected Color color;
 	
 	//Constructor
-	public Bean(int x, int y, int width, int height, Color color) {
+	public GameObject(int x, int y, int width, int height, Color color) {
 		setX(x);
 		setY(y);
 		setWidth(width);

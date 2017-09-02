@@ -1,7 +1,7 @@
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class Paddle extends Bean{
+public class Paddle extends GameObject{
 	
 	public Paddle(int x, int y, int width, int height, Color color) {
         super(x, y, width, height, color);
