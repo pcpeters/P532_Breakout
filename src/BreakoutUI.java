@@ -29,8 +29,8 @@ public class BreakoutUI extends JPanel implements Subject, Runnable {
 		setFocusable(true);		
 		setBackground(Color.WHITE);
 		
-		paddle = new Paddle(Constants.PADDLE_X_START, Constants.PADDLE_Y_START, Constants.PADDLE_WIDTH, Constants.PADDLE_HEIGHT, Color.GRAY);		
-        ball = new Ball(Constants.BALL_X_START, Constants.BALL_Y_START, Constants.BALL_WIDTH, Constants.BALL_HEIGHT, Color.BLACK);
+		paddle = new Paddle(Constants.PADDLE_X_START, Constants.PADDLE_Y_START, Constants.PADDLE_WIDTH, Constants.PADDLE_HEIGHT, Color.BLUE);		
+        ball = new Ball(Constants.BALL_X_START, Constants.BALL_Y_START, Constants.BALL_WIDTH, Constants.BALL_HEIGHT, Color.GREEN);
         clock = new Clock(getWidth() - 100, getHeight() - 30, Constants.BALL_WIDTH, Constants.BALL_HEIGHT, Color.RED);
         makeBricks();        
         
@@ -51,7 +51,7 @@ public class BreakoutUI extends JPanel implements Subject, Runnable {
             for (int j = 0; j < Constants.BRICK_ROWS; j++) {
                 brick[i][j] = new Brick((i * Constants.BRICK_WIDTH),
                         ((j * Constants.BRICK_HEIGHT) + (Constants.BRICK_HEIGHT / 2)),
-                        Constants.BRICK_WIDTH - 5, Constants.BRICK_HEIGHT - 5, Color.GRAY);
+                        Constants.BRICK_WIDTH - 5, Constants.BRICK_HEIGHT - 5, Color.YELLOW);
             }
         }
     }
